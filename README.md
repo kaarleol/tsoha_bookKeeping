@@ -4,7 +4,9 @@ Samankaltaisia sovelluksi on varmasti olemassa jo useampia mutta kehitämpä nyt
 
 ***Suunnitelma sovellukselle***
 
+
 **Toiminnallisuuksia**
+
 
 Tarkoituksena on luoda sovellus johon voi lisätä kirjoja, elokuvia ja TV-ohjelmia joita on lukenut/katsonut ja joita tahtoo tulevaisuudessa lukea/katsoa.
 Lisäksi sovelluksessa olisi mahdollista arvostella luettuja/katsottuja kirjoja/elokuvia.
@@ -14,6 +16,7 @@ Käyttäjä voisi hakea omat suosikkikirjansa yms. tai suunnitella mitä aikoo s
 Alkuun sovelluksen on määrä mahdollistaa näiden tietojen näyttäminen vain käyttäjälle itselleen, mutta jos aikaa jää, on mahdollista, että sovelluksessa voisi nähdä myös muiden arvostelemia kirjoja yms. ja hakea suosituimmat kirjat yms.
 
 **Toteutussuunnitelma**
+
 Taulut: Käyttäjät, luetut/katsotut kirjat/showt, luettavat/katsottavat kirjat/showt, arvostelut
 
 Käyttäjät: Nimi, salasana, automaattinen UID
@@ -25,4 +28,5 @@ Luettavat/katsottavat kirjat/showt: Nimi, tyyppi (kirja, elokuva, sarja, tms.), 
 Arvostelut: käyttäjä ID, kirja ID, arvosana, kuvaus, päivämäärä
 
 **Jos aikaa jää**
+
 Parannuksia interaktioihin käyttäjien välillä, esim kaveritiedot, päätös onko omat listat muiden nähtävissä, ehkä jotkut kirjasuositukset, haku erilaisille kirjoille ja niiden arvosteluille jne jne jne.
