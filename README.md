@@ -27,6 +27,7 @@ SECRET_KEY=<secret_key>
 **Example of .env -file:**
 
 DATABASE_URL=postgresql+psycopg2://postgres:12345678@localhost/postgres
+
 SECRET_KEY=12345678901234567890
 
 **Create the database in psql:**
