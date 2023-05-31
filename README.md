@@ -13,7 +13,9 @@ $ git clone https://github.com/kaarleol/tsoha_bookKeeping
 Linux:
 
 $ python3 -m venv venv
+
 $ source venv/bin/activate
+
 $ pip install -r ./requirements.txt
 
 **Create .env file to the source folder and fill in the database URL & secret key**
