@@ -7,6 +7,8 @@ Samankaltaisia sovelluksi on varmasti olemassa jo useampia mutta kehitämpä nyt
 
 Sovelluksessa on toimiva pohja, mahdollisuus kirjautua sisään, kirjautua ulos ja lähettää viestejä. Tämän pohjalta Sovelluksen muutaminen kirjojen arvostelemiseksi pitäisi olla mahdollista.
 
+Sovellus on käynnistettävissä vain paikallisesti.
+
 ***HOW TO OPEN***: 
 
 **Clone the repository:**
