@@ -3,6 +3,10 @@ Harjoitustyö kurssille Tsoha.
 Samankaltaisia sovelluksi on varmasti olemassa jo useampia mutta kehitämpä nyt oman versioni, lähinnä omaan käyttöön.
 
 
+***Sovelluksen tämänhetkinen tila***
+
+Sovelluksessa on toimiva pohja, mahdollisuus kirjautua sisään, kirjautua ulos ja lähettää viestejä. Tämän pohjalta Sovelluksen muutaminen kirjojen arvostelemiseksi pitäisi olla mahdollista.
+
 ***HOW TO OPEN***: 
 
 **Clone the repository:**
@@ -43,6 +47,7 @@ $ psql -d database_name < schema.sql
 Go back to the source file (tsoha_bookKeeping)
 
 $ flask run
+
 
 ***Suunnitelma sovellukselle***
 
