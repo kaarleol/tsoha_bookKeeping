@@ -1,23 +1,26 @@
 from app import app
 from flask import render_template, request, redirect
-import messages, users
+import books, users
 
 @app.route("/")
 def index():
-    list = messages.get_list()
-    return render_template("index.html", count=len(list), messages=list)
+    list = books.get_list()
+    return render_template("index.html", count=len(list), books=list)
 
 @app.route("/new")
 def new():
-    return render_template("new.html")
+    return render_template("newbook.html")
 
-@app.route("/send", methods=["POST"])
-def send():
-    content = request.form["content"]
-    if messages.send(content):
+@app.route("/addbook", methods=["POST"])
+def addbook():
+    title = request.form["title"]
+    author = request.form["author"]
+    publication_date = request.form["publication_date"]
+    genre = request.form["genre"]
+    if books.send(title, author, publication_date, genre):
         return redirect("/")
     else:
-        return render_template("error.html", message="Viestin lähetys ei onnistunut")
+        return render_template("error.html", message="Kirjan lisäys ei onnistunut")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
