@@ -1,0 +1,23 @@
+<a href="/">Aloitussivu </a> | <a href="/newreview">Merkkaa kirja luetuksi</a> | <a href="/newbook">Lisää yleinen kirja</a> | <a href="/favorites">Suosikit</a> | <a href="/allbooks">Selaa kirjoja</a> | <a href="/future">Lukulista</a>
+<form action="/addreview" method="post">
+    Lisää kirja: <br>
+    Kirjan id:
+    <textarea name="book_id" rows="1" cols="40"></textarea>
+    <p>
+    Kirjan vaihe:
+    <select name="read_status">
+    {% for option in dropdown_options %}
+      <option  value="{{ option }}">{{ option }}</option>
+    {% endfor %}
+    </select>
+    <p>
+    Arvosana (1-10):
+    <textarea name="rating" rows="1" cols="40"></textarea>
+    <p>
+    Arvostelu:
+    <p>
+    <textarea name="review" rows="3" cols="40"></textarea>
+    <br>
+
+    <input type="submit" value="Lähetä">
+    </form>

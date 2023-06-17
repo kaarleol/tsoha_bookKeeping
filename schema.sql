@@ -15,6 +15,7 @@ CREATE TABLE Book (
 );
 
 CREATE TABLE User_Books (
+  id SERIAL PRIMARY KEY,
   user_id INT,
   book_id INT,
   read_status VARCHAR(50) NOT NULL,
@@ -24,15 +25,19 @@ CREATE TABLE User_Books (
   FOREIGN KEY (book_id) REFERENCES Book(book_id)
 );
 
-CREATE TABLE Book_Genre (
-  genre_id INT PRIMARY KEY,
-  genre_name VARCHAR(255) NOT NULL
+CREATE TABLE future_reading (
+  id SERIAL PRIMARY KEY,
+  book_id INT,
+  user_id INT,
+  FOREIGN KEY (user_id) REFERENCES Users(user_id),
+  FOREIGN KEY (book_id) REFERENCES Book(book_id)
 );
 
 CREATE TABLE User_Favorites (
+  id SERIAL PRIMARY KEY,
   user_id INT,
   book_id INT,
   favorite_date DATE NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES User(user_id),
+  FOREIGN KEY (user_id) REFERENCES Users(user_id),
   FOREIGN KEY (book_id) REFERENCES Book(book_id)
 );

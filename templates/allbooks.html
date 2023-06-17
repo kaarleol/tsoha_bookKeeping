@@ -1,30 +1,23 @@
 <a href="/">Aloitussivu </a> | <a href="/newreview">Merkkaa kirja luetuksi</a> | <a href="/newbook">Lisää yleinen kirja</a> | <a href="/favorites">Suosikit</a> | <a href="/allbooks">Selaa kirjoja</a> | <a href="/future">Lukulista</a>
 <hr>
 <hr>
-{% if session.user_id %}
 <p>
-Omien arvostelujen määrä: {{ count }}
+Kirjojen määrä: {{ count }}
 <hr>
-{% if count > 0 %}
-{% for review in reviews %}
-<i>Otsikko:</i> {{ review[0] }}
+{% for book in books %}
+<i>Otsikko:</i> {{ book[0] }}
 <p>
-<i>Kirjailija:</i> {{ review[1] }}
+<i>Kirjailija:</i> {{ book[1] }}
 <p>
-<i>Julkaisupäivä:</i> {{ review[2] }}
+<i>Julkaisupäivä:</i> {{ book[2] }}
 <p>
-<i>Genre:</i> {{ review[3] }}
+<i>Genre:</i> {{ book[3] }}
 <p>
-<i>Kirjan vaihe:</i> {{ review[4] }}
-<p>
-<i>Arvosana:</i> {{ review[5] }}
-<p>
-<i>Arvostelu:</i> {{ review[6] }}
+<i>Kirjan lisääjä:</i> {{ book[4] }}
 <p>
 <hr>
 {% endfor %}
-{% endif %}
-
+{% if session.user_id %}
 Olet kirjautunut sisään.
 <a href="/logout">Kirjaudu ulos</a>
 {% else %}
