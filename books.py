@@ -3,7 +3,7 @@ import users
 from sqlalchemy.sql import text
 
 def get_list():
-    sql = text("SELECT B.title, B.author, B.publication_date, B.genre, U.username FROM book B, users U WHERE B.added_by=U.user_id ORDER BY B.title")
+    sql = text("SELECT B.book_id, B.title, B.author, B.publication_date, B.genre, U.username FROM book B, users U WHERE B.added_by=U.user_id ORDER BY B.book_id")
     result = db.session.execute(sql)
     return result.fetchall()
 

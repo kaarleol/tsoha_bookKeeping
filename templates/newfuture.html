@@ -1,0 +1,40 @@
+<a href="/">Aloitussivu </a> | <a href="/newreview">Merkkaa kirja luetuksi</a> | <a href="/newbook">Lisää yleinen kirja</a> | <a href="/newfavorite">Suosikit</a> | <a href="/allbooks">Selaa kirjoja</a> | <a href="/newfuture">Lukulista</a>
+<hr>
+<hr>
+{% if session.user_id %}
+<form action="/addfuture" method="post">
+    Lisää lukulistaan: <br>
+    Kirjan id:
+    <textarea name="book_id" rows="1" cols="40"></textarea>
+    <p>
+    <input type="submit" value="Lähetä">
+    </form>
+<hr>
+<p>
+Kirjoja lukulistassa: {{ count }}
+<hr>
+{% if count > 0 %}
+{% for future in futures %}
+<i>Kirjan ID:</i> {{ future[0] }}
+<p>
+<i>Lukulista ID:</i> {{ future[1] }}
+<p>
+<i>Otsikko:</i> {{ future[2] }}
+<p>
+<i>Kirjailija:</i> {{ future[3] }}
+<p>
+<i>Julkaisupäivä:</i> {{ future[4] }}
+<p>
+<i>Genre:</i> {{ future[5] }}
+<p>
+<i>Käyttäjä:</i> {{ future[6] }}
+<p>
+<hr>
+{% endfor %}
+{% endif %}
+
+Olet kirjautunut sisään.
+<a href="/logout">Kirjaudu ulos</a>
+{% else %}
+<a href="/login">Kirjaudu sisään luodaksesi lukulistan</a>
+{% endif %}

@@ -1,19 +1,21 @@
-<a href="/">Aloitussivu </a> | <a href="/newreview">Merkkaa kirja luetuksi</a> | <a href="/newbook">Lisää yleinen kirja</a> | <a href="/favorites">Suosikit</a> | <a href="/allbooks">Selaa kirjoja</a> | <a href="/future">Lukulista</a>
+<a href="/">Aloitussivu </a> | <a href="/newreview">Merkkaa kirja luetuksi</a> | <a href="/newbook">Lisää yleinen kirja</a> | <a href="/newfavorite">Suosikit</a> | <a href="/allbooks">Selaa kirjoja</a> | <a href="/newfuture">Lukulista</a>
 <hr>
 <hr>
 <p>
 Kirjojen määrä: {{ count }}
 <hr>
 {% for book in books %}
-<i>Otsikko:</i> {{ book[0] }}
+<i>ID:</i> {{ book[0] }}
 <p>
-<i>Kirjailija:</i> {{ book[1] }}
+<i>Otsikko:</i> {{ book[1] }}
 <p>
-<i>Julkaisupäivä:</i> {{ book[2] }}
+<i>Kirjailija:</i> {{ book[2] }}
 <p>
-<i>Genre:</i> {{ book[3] }}
+<i>Julkaisupäivä:</i> {{ book[3] }}
 <p>
-<i>Kirjan lisääjä:</i> {{ book[4] }}
+<i>Genre:</i> {{ book[4] }}
+<p>
+<i>Kirjan lisääjä:</i> {{ book[5] }}
 <p>
 <hr>
 {% endfor %}

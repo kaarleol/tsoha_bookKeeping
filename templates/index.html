@@ -1,25 +1,29 @@
-<a href="/">Aloitussivu </a> | <a href="/newreview">Merkkaa kirja luetuksi</a> | <a href="/newbook">Lisää yleinen kirja</a> | <a href="/favorites">Suosikit</a> | <a href="/allbooks">Selaa kirjoja</a> | <a href="/future">Lukulista</a>
+<a href="/">Aloitussivu </a> | <a href="/newreview">Merkkaa kirja luetuksi</a> | <a href="/newbook">Lisää yleinen kirja</a> | <a href="/newfavorite">Suosikit</a> | <a href="/allbooks">Selaa kirjoja</a> | <a href="/newfuture">Lukulista</a>
 <hr>
 <hr>
 {% if session.user_id %}
 <p>
-Omien arvostelujen määrä: {{ count }}
+Luesttuja kirjoja: {{ count }}
 <hr>
 {% if count > 0 %}
 {% for review in reviews %}
-<i>Otsikko:</i> {{ review[0] }}
+<i>Kirjan ID:</i> {{ review[0] }}
 <p>
-<i>Kirjailija:</i> {{ review[1] }}
+<i>Arvostelun ID:</i> {{ review[1] }}
 <p>
-<i>Julkaisupäivä:</i> {{ review[2] }}
+<i>Otsikko:</i> {{ review[2] }}
 <p>
-<i>Genre:</i> {{ review[3] }}
+<i>Kirjailija:</i> {{ review[3] }}
 <p>
-<i>Kirjan vaihe:</i> {{ review[4] }}
+<i>Julkaisupäivä:</i> {{ review[4] }}
 <p>
-<i>Arvosana:</i> {{ review[5] }}
+<i>Genre:</i> {{ review[5] }}
 <p>
-<i>Arvostelu:</i> {{ review[6] }}
+<i>Kirjan vaihe:</i> {{ review[6] }}
+<p>
+<i>Arvosana:</i> {{ review[7] }}
+<p>
+<i>Arvostelu:</i> {{ review[8] }}
 <p>
 <hr>
 {% endfor %}

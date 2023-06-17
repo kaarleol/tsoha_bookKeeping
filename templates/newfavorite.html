@@ -1,0 +1,40 @@
+<a href="/">Aloitussivu </a> | <a href="/newreview">Merkkaa kirja luetuksi</a> | <a href="/newbook">Lisää yleinen kirja</a> | <a href="/newfavorite">Suosikit</a> | <a href="/allbooks">Selaa kirjoja</a> | <a href="/newfuture">Lukulista</a>
+<hr>
+<hr>
+{% if session.user_id %}
+<form action="/addfavorite" method="post">
+    Lisää suosikki: <br>
+    Kirjan id:
+    <textarea name="book_id" rows="1" cols="40"></textarea>
+    <p>
+    <input type="submit" value="Lähetä">
+    </form>
+<hr>
+<p>
+Suosikkeja: {{ count }}
+<hr>
+{% if count > 0 %}
+{% for favorite in favorites %}
+<i>Kirjan ID:</i> {{ favorite[0] }}
+<p>
+<i>Suosikki ID:</i> {{ favorite[1] }}
+<p>
+<i>Otsikko:</i> {{ favorite[2] }}
+<p>
+<i>Kirjailija:</i> {{ favorite[3] }}
+<p>
+<i>Julkaisupäivä:</i> {{ favorite[4] }}
+<p>
+<i>Genre:</i> {{ favorite[5] }}
+<p>
+<i>Käyttäjä:</i> {{ favorite[6] }}
+<p>
+<hr>
+{% endfor %}
+{% endif %}
+
+Olet kirjautunut sisään.
+<a href="/logout">Kirjaudu ulos</a>
+{% else %}
+<a href="/login">Kirjaudu sisään lisätäksesi suosikkeja</a>
+{% endif %}

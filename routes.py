@@ -1,6 +1,6 @@
 from app import app
 from flask import render_template, request, redirect
-import books, users, reviews
+import books, users, reviews, favorites, futurereading
 
 @app.route("/")
 def index():
@@ -25,6 +25,22 @@ def newreview():
     dropdown_options = ['Luettu', 'Kesken']
     return render_template('newreview.html', dropdown_options=dropdown_options)
 
+@app.route("/newfavorite")
+def newfavorite():
+    list = favorites.get_list()
+    if list:
+        return render_template("newfavorite.html", count=len(list), favorites=list)
+    else:
+        return render_template("newfavorite.html", count=0, favorites=None)
+
+@app.route("/newfuture")
+def newfuture():
+    list = futurereading.get_list()
+    if list:
+        return render_template("newfuture.html", count=len(list), futures=list)
+    else:
+        return render_template("newfuture.html", count=0, futures=None)
+
 
 @app.route("/addbook", methods=["POST"])
 def addbook():
@@ -47,6 +63,22 @@ def addreview():
         return redirect("/")
     else:
         return render_template("error.html", message="Merkinnän lisäys ei onnistunut")
+    
+@app.route("/addfavorite", methods=["POST"])
+def addfavorite():
+    book_id = request.form["book_id"]
+    if favorites.send(book_id):
+        return redirect("/newfavorite")
+    else:
+        return render_template("error.html", message="Suosikin lisäys ei onnistunut")    
+    
+@app.route("/addfuture", methods=["POST"])
+def addfuture():
+    book_id = request.form["book_id"]
+    if futurereading.send(book_id):
+        return redirect("/newfavorite")
+    else:
+        return render_template("error.html", message="Lukulistan muutos ei onnistunut")  
     
 
 @app.route("/login", methods=["GET", "POST"])
@@ -74,6 +106,8 @@ def register():
         username = request.form["username"]
         password1 = request.form["password1"]
         password2 = request.form["password2"]
+        if len(username)==0 or len(password1)==0:
+            return render_template("error.html", message="Käyttäjänimi ja salasana eivät voi olla tyhjiä")
         if password1 != password2:
             return render_template("error.html", message="Salasanat eroavat")
         if users.register(username, password1):
