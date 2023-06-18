@@ -1,16 +1,6 @@
-<a href="/">Aloitussivu </a> | <a href="/newreview">Merkkaa kirja luetuksi</a> | <a href="/newbook">Lisää yleinen kirja</a> | <a href="/newfavorite">Suosikit</a> | <a href="/allbooks">Selaa kirjoja</a> | <a href="/newfuture">Lukulista</a>
-<hr>
+<a href="/">Aloitussivu </a> | <a href="/newreview">Merkkaa kirja luetuksi</a> | <a href="/newbook">Lisää yleinen kirja</a> |  <a href="/allbooks">Selaa kirjoja</a> | <a href="/newfavorite">Suosikit</a> | <a href="/newfuture">Lukulista</a><hr>
 <hr>
 {% if session.user_id %}
-<form action="/addfavorite" method="post">
-    Lisää suosikki: <br>
-    Kirjan id:
-    <textarea name="book_id" rows="1" cols="40"></textarea>
-    <p>
-    <input type="submit" value="Lähetä">
-    </form>
-<hr>
-<p>
 Suosikkeja: {{ count }}
 <hr>
 {% if count > 0 %}

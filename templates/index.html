@@ -1,5 +1,4 @@
-<a href="/">Aloitussivu </a> | <a href="/newreview">Merkkaa kirja luetuksi</a> | <a href="/newbook">Lisää yleinen kirja</a> | <a href="/newfavorite">Suosikit</a> | <a href="/allbooks">Selaa kirjoja</a> | <a href="/newfuture">Lukulista</a>
-<hr>
+<a href="/">Aloitussivu </a> | <a href="/newreview">Merkkaa kirja luetuksi</a> | <a href="/newbook">Lisää yleinen kirja</a> |  <a href="/allbooks">Selaa kirjoja</a> | <a href="/newfavorite">Suosikit</a> | <a href="/newfuture">Lukulista</a><hr>
 <hr>
 {% if session.user_id %}
 <p>
@@ -25,10 +24,17 @@ Luettuja kirjoja: {{ count }}
 <p>
 <i>Arvostelu:</i> {{ review[8] }}
 <p>
-
 <form action="/deletereview" method="post">
     <input type="hidden" name="id" value="{{ review[1] }}">
     <input type="submit" value="Poista">
+</form>
+<form action="/addfavorite" method="post">
+    <input type="hidden" name="book_id" value="{{ review[0] }}">
+    <input type="submit" value="Merkkaa suosikiksi">
+</form>
+<form action="/addfuture" method="post">
+    <input type="hidden" name="book_id" value="{{ review[0] }}">
+    <input type="submit" value="Lisää lukulistalle">   
 </form>
 <hr>
 {% endfor %}

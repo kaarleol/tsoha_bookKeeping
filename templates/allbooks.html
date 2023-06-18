@@ -1,5 +1,4 @@
-<a href="/">Aloitussivu </a> | <a href="/newreview">Merkkaa kirja luetuksi</a> | <a href="/newbook">Lisää yleinen kirja</a> | <a href="/newfavorite">Suosikit</a> | <a href="/allbooks">Selaa kirjoja</a> | <a href="/newfuture">Lukulista</a>
-<hr>
+<a href="/">Aloitussivu </a> | <a href="/newreview">Merkkaa kirja luetuksi</a> | <a href="/newbook">Lisää yleinen kirja</a> |  <a href="/allbooks">Selaa kirjoja</a> | <a href="/newfavorite">Suosikit</a> | <a href="/newfuture">Lukulista</a><hr>
 <hr>
 <p>
 Kirjojen määrä: {{ count }}
@@ -17,10 +16,18 @@ Kirjojen määrä: {{ count }}
 <p>
 <i>Kirjan lisääjä:</i> {{ book[5] }}
 <p>
-<form action="/deletebook" method="post">
-    <input type="hidden" name="book_id" value="{{ book[0] }}">
-    <input type="submit" value="Poista">
-</form>
+    <form action="/deletebook" method="post">
+        <input type="hidden" name="book_id" value="{{ book[0] }}">
+        <input type="submit" value="Poista">
+    </form>
+    <form action="/addfavorite" method="post">
+        <input type="hidden" name="book_id" value="{{ book[0] }}">
+        <input type="submit" value="Merkkaa suosikiksi">
+    </form>
+    <form action="/addfuture" method="post">
+        <input type="hidden" name="book_id" value="{{ book[0] }}">
+        <input type="submit" value="Lisää lukulistalle">   
+    </form>
 <hr>
 {% endfor %}
 {% if session.user_id %}
