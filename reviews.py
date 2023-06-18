@@ -12,6 +12,8 @@ def get_list():
 
 def send(book_id, read_status, rating, review):
     user_id = users.user_id()
+    if not book_id or not read_status or not rating or not review:
+        return False
     if user_id == 0:
         return False
     sql = text("INSERT INTO user_books (user_id, book_id, read_status, rating, review) VALUES (:user_id, :book_id, :read_status, :rating, :review)")

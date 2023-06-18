@@ -1,4 +1,4 @@
-<a href="/">Aloitussivu </a> | <a href="/newreview">Merkkaa kirja luetuksi</a> | <a href="/newbook">Lisää yleinen kirja</a> |  <a href="/allbooks">Selaa kirjoja</a> | <a href="/newfavorite">Suosikit</a> | <a href="/newfuture">Lukulista</a><hr>
+<a href="/">Aloitussivu </a> | <a href="/newbook">Lisää yleinen kirja</a> |  <a href="/allbooks">Selaa kirjoja</a> | <a href="/newfavorite">Suosikit</a> | <a href="/newfuture">Lukulista</a><hr>
 <hr>
 <p>
 Kirjojen määrä: {{ count }}
@@ -15,6 +15,34 @@ Kirjojen määrä: {{ count }}
 <i>Genre:</i> {{ book[4] }}
 <p>
 <i>Kirjan lisääjä:</i> {{ book[5] }}
+<p>
+
+<button id="open-form-button" onclick="openForm()">Merkkaa luetuksi</button>
+
+<div id="reviewform" style="display: none;">
+    <form action="/addreview" method="post">
+        Lisää kirja: <br>
+        <input type="hidden" name="book_id" value="{{ book[0] }}">
+        <p>
+        Kirjan vaihe:
+        <select name="read_status">
+        {% for option in dropdown_options %}
+          <option  value="{{ option }}">{{ option }}</option>
+        {% endfor %}
+        </select>
+        <p>
+        Arvosana (1-10):
+        <textarea name="rating" rows="1" cols="40"></textarea>
+        <p>
+        Arvostelu:
+        <p>
+        <textarea name="review" rows="3" cols="40"></textarea>
+        <br>
+    
+        <input type="submit" value="Lähetä">
+    </form>
+</div>
+
 <p>
     <form action="/deletebook" method="post">
         <input type="hidden" name="book_id" value="{{ book[0] }}">
@@ -36,3 +64,10 @@ Olet kirjautunut sisään.
 {% else %}
 <a href="/login">Kirjaudu sisään</a>
 {% endif %}
+
+<script>
+    function openForm() {
+      var formDiv = document.getElementById("reviewform");
+      formDiv.style.display = "block";
+    }
+ </script>

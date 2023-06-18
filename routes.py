@@ -13,17 +13,14 @@ def index():
 
 @app.route("/allbooks")
 def allbooks():
+    dropdown_options = ['Luettu', 'Kesken']
     list = books.get_list()
-    return render_template("allbooks.html", count=len(list), books=list)
+    return render_template("allbooks.html", count=len(list), books=list, dropdown_options=dropdown_options)
 
 @app.route("/newbook")
 def newbook():
     return render_template("newbook.html")
 
-@app.route("/newreview")
-def newreview():
-    dropdown_options = ['Luettu', 'Kesken']
-    return render_template('newreview.html', dropdown_options=dropdown_options)
 
 @app.route("/newfavorite")
 def newfavorite():
@@ -73,7 +70,7 @@ def addreview():
     if reviews.send(book_id, read_status, rating, review):
         return redirect("/")
     else:
-        return render_template("error.html", message="Merkinnän lisäys ei onnistunut")
+        return render_template("error.html", message="Merkinnän lisäys ei onnistunut. Kaikki kentät pitää täyttää")
     
 @app.route("/deletereview", methods=["POST"])
 def deletereview():
