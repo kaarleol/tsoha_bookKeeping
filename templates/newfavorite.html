@@ -29,6 +29,10 @@ Suosikkeja: {{ count }}
 <p>
 <i>Käyttäjä:</i> {{ favorite[6] }}
 <p>
+    <form action="/deletefavorite" method="post">
+        <input type="hidden" name="id" value="{{ favorite[1] }}">
+        <input type="submit" value="Poista">
+    </form>
 <hr>
 {% endfor %}
 {% endif %}

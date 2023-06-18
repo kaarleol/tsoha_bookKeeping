@@ -15,3 +15,9 @@ def send(title, author, publication_date, genre):
     db.session.execute(sql, {"title":title, "author":author, "publication_date":publication_date, "genre":genre, "added_by":added_by})
     db.session.commit()
     return True
+
+def delete(book_id):
+    sql = text("DELETE FROM book B WHERE B.book_id = :book_id")
+    db.session.execute(sql, {"book_id":book_id})
+    db.session.commit()
+    return True

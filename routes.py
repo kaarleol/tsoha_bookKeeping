@@ -53,6 +53,17 @@ def addbook():
     else:
         return render_template("error.html", message="Kirjan lisäys ei onnistunut")
     
+@app.route("/deletebook", methods=["POST"])
+def deletebook():
+    book_id = request.form["book_id"]
+    if book_id:
+        if books.delete(book_id):
+            return redirect("/allbooks")
+        else:
+            return render_template("error.html", message="Merkinnän poistaminen ei onnistunut")
+    else:
+        return render_template("error.html", message="Kirjan poistaminen ei onnistunut")
+    
 @app.route("/addreview", methods=["POST"])
 def addreview():
     book_id = request.form["book_id"]
@@ -64,6 +75,17 @@ def addreview():
     else:
         return render_template("error.html", message="Merkinnän lisäys ei onnistunut")
     
+@app.route("/deletereview", methods=["POST"])
+def deletereview():
+    id = request.form["id"]
+    if id:
+        if reviews.delete(id):
+            return redirect("/")
+        else:
+            return render_template("error.html", message="Merkinnän poistaminen ei onnistunut")
+    else:
+        return render_template("error.html", message="Merkinnän poistaminen ei onnistunut")    
+    
 @app.route("/addfavorite", methods=["POST"])
 def addfavorite():
     book_id = request.form["book_id"]
@@ -72,13 +94,36 @@ def addfavorite():
     else:
         return render_template("error.html", message="Suosikin lisäys ei onnistunut")    
     
+@app.route("/deletefavorite", methods=["POST"])
+def deletefavorite():
+    id = request.form["id"]
+    if id:
+        if favorites.delete(id):
+            return redirect("/newfavorite")
+        else:
+            return render_template("error.html", message="Merkinnän poistaminen ei onnistunut")
+    else:
+        return render_template("error.html", message="Suosikin poistaminen ei onnistunut")
+    
 @app.route("/addfuture", methods=["POST"])
 def addfuture():
     book_id = request.form["book_id"]
     if futurereading.send(book_id):
-        return redirect("/newfavorite")
+        return redirect("/newfuture")
     else:
         return render_template("error.html", message="Lukulistan muutos ei onnistunut")  
+    
+@app.route("/deletefuture", methods=["POST"])
+def deletefuture():
+    id = request.form["id"]
+    if id:
+        if futurereading.delete(id):
+            return redirect("/newfuture")
+        else:
+            return render_template("error.html", message="Merkinnän poistaminen ei onnistunut")
+    else:
+        return render_template("error.html", message="Merkinnän poistaminen ei onnistunut")
+    
     
 
 @app.route("/login", methods=["GET", "POST"])

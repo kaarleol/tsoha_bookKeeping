@@ -18,3 +18,9 @@ def send(book_id, read_status, rating, review):
     db.session.execute(sql, {"user_id":user_id, "book_id":book_id, "read_status":read_status, "rating":rating, "review":review})
     db.session.commit()
     return True
+
+def delete(id):
+    sql = text("DELETE FROM user_books R WHERE R.id = :id")
+    db.session.execute(sql, {"id":id})
+    db.session.commit()
+    return True

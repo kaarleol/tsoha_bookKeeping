@@ -29,6 +29,10 @@ Kirjoja lukulistassa: {{ count }}
 <p>
 <i>Käyttäjä:</i> {{ future[6] }}
 <p>
+<form action="/deletefuture" method="post">
+    <input type="hidden" name="id" value="{{ future[1] }}">
+    <input type="submit" value="Poista">
+</form>    
 <hr>
 {% endfor %}
 {% endif %}

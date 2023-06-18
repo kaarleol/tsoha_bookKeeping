@@ -3,7 +3,7 @@
 <hr>
 {% if session.user_id %}
 <p>
-Luesttuja kirjoja: {{ count }}
+Luettuja kirjoja: {{ count }}
 <hr>
 {% if count > 0 %}
 {% for review in reviews %}
@@ -25,6 +25,11 @@ Luesttuja kirjoja: {{ count }}
 <p>
 <i>Arvostelu:</i> {{ review[8] }}
 <p>
+
+<form action="/deletereview" method="post">
+    <input type="hidden" name="id" value="{{ review[1] }}">
+    <input type="submit" value="Poista">
+</form>
 <hr>
 {% endfor %}
 {% endif %}

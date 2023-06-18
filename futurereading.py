@@ -18,3 +18,9 @@ def send(book_id):
     db.session.execute(sql, {"user_id":user_id, "book_id":book_id})
     db.session.commit()
     return True
+
+def delete(id):
+    sql = text("DELETE FROM future_reading F WHERE F.id = :id")
+    db.session.execute(sql, {"id":id})
+    db.session.commit()
+    return True

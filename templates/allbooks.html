@@ -17,6 +17,10 @@ Kirjojen määrä: {{ count }}
 <p>
 <i>Kirjan lisääjä:</i> {{ book[5] }}
 <p>
+<form action="/deletebook" method="post">
+    <input type="hidden" name="book_id" value="{{ book[0] }}">
+    <input type="submit" value="Poista">
+</form>
 <hr>
 {% endfor %}
 {% if session.user_id %}
