@@ -5,9 +5,18 @@ Samankaltaisia sovelluksi on varmasti olemassa jo useampia mutta kehitämpä nyt
 
 ***Sovelluksen tämänhetkinen tila***
 
-Sovelluksessa on toimiva pohja, mahdollisuus kirjautua sisään, kirjautua ulos ja lähettää viestejä. Tämän pohjalta Sovelluksen muutaminen kirjojen arvostelemiseksi pitäisi olla mahdollista.
+Sovelluksessa voi rekisteröityä, kirjautua sisään, kirjautua ulos, lisätä julkisia kirjoja, merkata julkisia kirjoja itselle luetuksi ja arvostella niitä, merkata kirjoja suosikeiksi ja lisätä kirjoja lukulistalle. Lisäksi sovelluksessa voi poistaa kirjoja, arvosteluja, suosikkeja ja merkintöjä lukulistalla.
 
-Sovellus on käynnistettävissä vain paikallisesti.
+Sovelluksessa on viisi taulua: käyttäjät, kirjat, arvostelut, suosikit ja lukulista.
+
+***Suunnitelmia tulevaisuuteen***
+Sovellukseen on tarkoitus tulevaisuudessa tehdä mahdollisuus muokata omia arvosteluja, parantaa filteröintiä, esim omat parhaat arvostelut näkyviin, kirjat listattu aakkosjärjestyksessä yms. Lisäksi toiveenani olisi tehdä jonkinlainen hakutoiminto kirjoille.
+
+Lisäksi tarkoitus on parantaa sovelluksen turvallisuutta kurssimateriaalin luvun 4 mukaiseksi.
+
+Lisäksi sovelluksen napit yms. ovat melko sotkuisia joten varmaan siistin niitä.
+
+On mahdollista että sovellukseen lisätään myös tuki elokuville, sarjoille yms. mutta se tulisi käytännössä olemaan vain oma kenttänsä kirjataulussa, esim. "viihdemuoto" tms.
 
 ***HOW TO OPEN***: 
 
@@ -36,6 +45,8 @@ DATABASE_URL=postgresql+psycopg2://postgres:12345678@localhost/postgres
 
 SECRET_KEY=12345678901234567890
 
+**Note: SECRET_KEY NEEDS TO BE SET FOR LOGIN TO WORK**
+
 **Create the database in psql:**
 
 Go back to the source file (tsoha_bookKeeping)
@@ -49,33 +60,3 @@ $ psql -d database_name < schema.sql
 Go back to the source file (tsoha_bookKeeping)
 
 $ flask run
-
-
-***Suunnitelma sovellukselle***
-
-
-**Toiminnallisuuksia**
-
-
-Tarkoituksena on luoda sovellus johon voi lisätä kirjoja, elokuvia ja TV-ohjelmia joita on lukenut/katsonut ja joita tahtoo tulevaisuudessa lukea/katsoa.
-Lisäksi sovelluksessa olisi mahdollista arvostella luettuja/katsottuja kirjoja/elokuvia.
-
-Käyttäjä voisi hakea omat suosikkikirjansa yms. tai suunnitella mitä aikoo seuraavaksi lukea/katsoa.
-
-Alkuun sovelluksen on määrä mahdollistaa näiden tietojen näyttäminen vain käyttäjälle itselleen, mutta jos aikaa jää, on mahdollista, että sovelluksessa voisi nähdä myös muiden arvostelemia kirjoja yms. ja hakea suosituimmat kirjat yms.
-
-**Toteutussuunnitelma**
-
-Taulut: Käyttäjät, luetut/katsotut kirjat/showt, luettavat/katsottavat kirjat/showt, arvostelut
-
-Käyttäjät: Nimi, salasana, automaattinen UID
-
-Luetut/katsotut kirjat/showt: Nimi, tyyppi (kirja, elokuva, sarja, tms.), päivämäärä, ID (joko yksityinen id käyttäjälle tai kirjalle oma ID joka kaikilla käytössä tai molemmat)
-
-Luettavat/katsottavat kirjat/showt: Nimi, tyyppi (kirja, elokuva, sarja, tms.), ID (joko yksityinen id käyttäjälle tai kirjalle oma ID joka kaikilla käytössä tai molemmat)
-
-Arvostelut: käyttäjä ID, kirja ID, arvosana, kuvaus, päivämäärä
-
-**Jos aikaa jää**
-
-Parannuksia interaktioihin käyttäjien välillä, esim kaveritiedot, päätös onko omat listat muiden nähtävissä, ehkä jotkut kirjasuositukset, haku erilaisille kirjoille ja niiden arvosteluille jne jne jne.
