@@ -4,6 +4,7 @@ Samankaltaisia sovelluksi on varmasti olemassa jo useampia mutta kehitämpä nyt
 
 
 ***Sovelluksen tämänhetkinen tila***
+
 Sovellus on avattavissa vain paikallisesti.
 
 Sovelluksessa voi rekisteröityä, kirjautua sisään, kirjautua ulos, lisätä julkisia kirjoja, merkata julkisia kirjoja itselle luetuksi ja arvostella niitä, merkata kirjoja suosikeiksi ja lisätä kirjoja lukulistalle. Lisäksi sovelluksessa voi poistaa kirjoja, arvosteluja, suosikkeja ja merkintöjä lukulistalla. Sovelluksessa voi nyt myös muokata itse lisäämiään kirjoja ja arvosteluja.
