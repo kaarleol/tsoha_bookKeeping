@@ -4,19 +4,12 @@ Samankaltaisia sovelluksi on varmasti olemassa jo useampia mutta kehitämpä nyt
 
 
 ***Sovelluksen tämänhetkinen tila***
+Sovellus on avattavissa vain paikallisesti.
 
-Sovelluksessa voi rekisteröityä, kirjautua sisään, kirjautua ulos, lisätä julkisia kirjoja, merkata julkisia kirjoja itselle luetuksi ja arvostella niitä, merkata kirjoja suosikeiksi ja lisätä kirjoja lukulistalle. Lisäksi sovelluksessa voi poistaa kirjoja, arvosteluja, suosikkeja ja merkintöjä lukulistalla.
+Sovelluksessa voi rekisteröityä, kirjautua sisään, kirjautua ulos, lisätä julkisia kirjoja, merkata julkisia kirjoja itselle luetuksi ja arvostella niitä, merkata kirjoja suosikeiksi ja lisätä kirjoja lukulistalle. Lisäksi sovelluksessa voi poistaa kirjoja, arvosteluja, suosikkeja ja merkintöjä lukulistalla. Sovelluksessa voi nyt myös muokata itse lisäämiään kirjoja ja arvosteluja.
 
 Sovelluksessa on viisi taulua: käyttäjät, kirjat, arvostelut, suosikit ja lukulista.
 
-***Suunnitelmia tulevaisuuteen***
-Sovellukseen on tarkoitus tulevaisuudessa tehdä mahdollisuus muokata omia arvosteluja, parantaa filteröintiä, esim omat parhaat arvostelut näkyviin, kirjat listattu aakkosjärjestyksessä yms. Lisäksi toiveenani olisi tehdä jonkinlainen hakutoiminto kirjoille.
-
-Lisäksi tarkoitus on parantaa sovelluksen turvallisuutta kurssimateriaalin luvun 4 mukaiseksi.
-
-Lisäksi sovelluksen napit yms. ovat melko sotkuisia joten varmaan siistin niitä.
-
-On mahdollista että sovellukseen lisätään myös tuki elokuville, sarjoille yms. mutta se tulisi käytännössä olemaan vain oma kenttänsä kirjataulussa, esim. "viihdemuoto" tms.
 
 ***HOW TO OPEN***: 
 
