@@ -5,7 +5,6 @@ Kirjojen määrä: {{ count }}
 <hr>
 {% for book in books %}
   <div id="book-{{ book[0] }}">
-    <p><i>ID:</i> {{ book[0] }}</p>
     <p><i>Otsikko:</i> {{ book[1] }}</p>
     <p><i>Kirjailija:</i> {{ book[2] }}</p>
     <p><i>Julkaisupäivä:</i> {{ book[3] }}</p>
@@ -53,7 +52,7 @@ Kirjojen määrä: {{ count }}
         </select>
         <p>
         Arvosana (1-10):
-        <textarea name="rating" rows="1" cols="40"></textarea>
+        <input type="number" name="rating" min="1" max="10">
         <p>
         Arvostelu:
         <p>

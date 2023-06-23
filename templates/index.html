@@ -2,28 +2,37 @@
 <hr>
 {% if session.user_id %}
 <p>
-Luettuja kirjoja: {{ count }}
-<hr>
-{% if count > 0 %}
-{% for review in reviews %}
-<i>Kirjan ID:</i> {{ review[0] }}
-<p>
-<i>Arvostelun ID:</i> {{ review[1] }}
-<p>
-<i>Otsikko:</i> {{ review[2] }}
-<p>
-<i>Kirjailija:</i> {{ review[3] }}
-<p>
-<i>Julkaisupäivä:</i> {{ review[4] }}
-<p>
-<i>Genre:</i> {{ review[5] }}
-<p>
-<i>Kirjan vaihe:</i> {{ review[6] }}
-<p>
-<i>Arvosana:</i> {{ review[7] }}
-<p>
-<i>Arvostelu:</i> {{ review[8] }}
-<p>
+    <p>Luettuja kirjoja: {{ count }}</p>
+    <hr>
+    {% if count > 0 %}
+      {% for review in reviews %}
+        <div id="review-{{ review[1] }}">
+          <p><i>Otsikko:</i> {{ review[2] }}</p>
+          <p><i>Kirjailija:</i> {{ review[3] }}</p>
+          <p><i>Julkaisupäivä:</i> {{ review[4] }}</p>
+          <p><i>Genre:</i> {{ review[5] }}</p>
+          <p><i>Kirjan vaihe:</i> {{ review[6] }}</p>
+          <p><i>Arvosana:</i> {{ review[7] }}</p>
+          <p><i>Arvostelu:</i> {{ review[8] }}</p>
+          <button onclick="toggleEditForm('{{ review[1] }}')">Edit</button>
+        </div>
+
+        <div id="form-{{ review[1] }}" style="display: none;">
+          <form action="/editreview" method="post">
+            <select name="read_status">
+                {% for option in dropdown_options %}
+                  <option  value="{{ option }}">{{ option }}</option>
+                {% endfor %}
+            </select>
+            <input type="number" name="rating" value="{{ review[7] }}" min="1" max="10">
+            <textarea name="review">{{ review[8] }}</textarea>
+            <button type="submit">Save</button>
+
+            <input type="hidden" name="id" value="{{ review[1] }}">
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+          </form>
+        </div>
+
 <form action="/deletereview" method="post">
     <input type="hidden" name="id" value="{{ review[1] }}">
     <input type="submit" value="Poista">
@@ -51,3 +60,17 @@ Olet kirjautunut sisään.
 {% else %}
 <a href="/login">Kirjaudu sisään</a>
 {% endif %}
+
+<script>
+    function toggleEditForm(reviewId) {
+      var reviewDiv = document.getElementById("review-" + reviewId);
+      var formDiv = document.getElementById("form-" + reviewId);
+      if (reviewDiv.style.display === "none") {
+        reviewDiv.style.display = "block";
+        formDiv.style.display = "none";
+      } else {
+        reviewDiv.style.display = "none";
+        formDiv.style.display = "block";
+      }
+    }
+</script>

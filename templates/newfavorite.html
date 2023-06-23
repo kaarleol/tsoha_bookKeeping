@@ -5,10 +5,6 @@ Suosikkeja: {{ count }}
 <hr>
 {% if count > 0 %}
 {% for favorite in favorites %}
-<i>Kirjan ID:</i> {{ favorite[0] }}
-<p>
-<i>Suosikki ID:</i> {{ favorite[1] }}
-<p>
 <i>Otsikko:</i> {{ favorite[2] }}
 <p>
 <i>Kirjailija:</i> {{ favorite[3] }}

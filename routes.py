@@ -5,8 +5,9 @@ import books, users, reviews, favorites, futurereading
 @app.route("/")
 def index():
     list = reviews.get_list()
+    dropdown_options = ['Luettu', 'Kesken']
     if list:
-        return render_template("index.html", count=len(list), reviews=list)
+        return render_template("index.html", count=len(list), reviews=list, dropdown_options=dropdown_options)
     else:
         return render_template("index.html", count=0, reviews=None)
     
@@ -98,6 +99,21 @@ def addreview():
     else:
         return render_template("error.html", message="Merkinnän lisäys ei onnistunut. Kaikki kentät pitää täyttää")
     
+@app.route("/editreview", methods=["POST"])
+def editreview():
+    id = request.form["id"]
+    read_status = request.form["read_status"]
+    rating = request.form["rating"]
+    review = request.form["review"]
+
+    if session["csrf_token"] != request.form["csrf_token"]:
+        return render_template("error.html", message="Unauthorized action.")
+    
+    if reviews.edit(id, read_status, rating, review):
+        return redirect("/")
+    else:
+        return render_template("error.html", message="Merkinnän muokkaaminen ei onnistunut. Kaikki kentät pitää täyttää")
+
 @app.route("/deletereview", methods=["POST"])
 def deletereview():
     id = request.form["id"]
