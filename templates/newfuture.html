@@ -1,7 +1,8 @@
-<a href="/">Aloitussivu </a> | <a href="/newbook">Lisää yleinen kirja</a> |  <a href="/allbooks">Selaa kirjoja</a> | <a href="/newfavorite">Suosikit</a> | <a href="/newfuture">Lukulista</a><hr>
+<a href="/">Aloitussivu</a> | <a href="/newbook">Lisää yleinen kirja</a> | <a href="/allbooks">Selaa kirjoja</a> | <a href="/newfavorite">Suosikit</a> | <a href="/newfuture">Lukulista</a>
 <hr>
-{% if session.user_id %}
+<hr>
 
+{% if session.user_id %}
 Kirjoja lukulistassa: {{ count }}
 <hr>
 {% if count > 0 %}
@@ -21,7 +22,7 @@ Kirjoja lukulistassa: {{ count }}
     <input type="submit" value="Poista">
 
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-</form>    
+</form>
 <hr>
 {% endfor %}
 {% endif %}

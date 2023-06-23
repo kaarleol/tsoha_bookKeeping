@@ -1,76 +1,77 @@
-<a href="/">Aloitussivu </a> | <a href="/newbook">Lisää yleinen kirja</a> |  <a href="/allbooks">Selaa kirjoja</a> | <a href="/newfavorite">Suosikit</a> | <a href="/newfuture">Lukulista</a><hr>
+<a href="/">Aloitussivu</a> | <a href="/newbook">Lisää yleinen kirja</a> | <a href="/allbooks">Selaa kirjoja</a> | <a href="/newfavorite">Suosikit</a> | <a href="/newfuture">Lukulista</a>
 <hr>
+<hr>
+
 {% if session.user_id %}
 <p>
     <p>Luettuja kirjoja: {{ count }}</p>
     <hr>
     {% if count > 0 %}
-      {% for review in reviews %}
-        <div id="review-{{ review[1] }}">
-          <p><i>Otsikko:</i> {{ review[2] }}</p>
-          <p><i>Kirjailija:</i> {{ review[3] }}</p>
-          <p><i>Julkaisupäivä:</i> {{ review[4] }}</p>
-          <p><i>Genre:</i> {{ review[5] }}</p>
-          <p><i>Kirjan vaihe:</i> {{ review[6] }}</p>
-          <p><i>Arvosana:</i> {{ review[7] }}</p>
-          <p><i>Arvostelu:</i> {{ review[8] }}</p>
-          <button onclick="toggleEditForm('{{ review[1] }}')">Edit</button>
-        </div>
+        {% for review in reviews %}
+            <div id="review-{{ review[1] }}">
+                <p><i>Otsikko:</i> {{ review[2] }}</p>
+                <p><i>Kirjailija:</i> {{ review[3] }}</p>
+                <p><i>Julkaisupäivä:</i> {{ review[4] }}</p>
+                <p><i>Genre:</i> {{ review[5] }}</p>
+                <p><i>Kirjan vaihe:</i> {{ review[6] }}</p>
+                <p><i>Arvosana:</i> {{ review[7] }}</p>
+                <p><i>Arvostelu:</i> {{ review[8] }}</p>
+                <button onclick="toggleEditForm('{{ review[1] }}')">Edit</button>
+            </div>
 
-        <div id="form-{{ review[1] }}" style="display: none;">
-          <form action="/editreview" method="post">
-            <select name="read_status">
-                {% for option in dropdown_options %}
-                  <option  value="{{ option }}">{{ option }}</option>
-                {% endfor %}
-            </select>
-            <input type="number" name="rating" value="{{ review[7] }}" min="1" max="10">
-            <textarea name="review">{{ review[8] }}</textarea>
-            <button type="submit">Save</button>
+            <div id="form-{{ review[1] }}" style="display: none;">
+                <form action="/editreview" method="post">
+                    <select name="read_status">
+                        {% for option in dropdown_options %}
+                            <option value="{{ option }}">{{ option }}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="number" name="rating" value="{{ review[7] }}" min="1" max="10">
+                    <textarea name="review">{{ review[8] }}</textarea>
+                    <button type="submit">Save</button>
 
-            <input type="hidden" name="id" value="{{ review[1] }}">
-            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-          </form>
-        </div>
+                    <input type="hidden" name="id" value="{{ review[1] }}">
+                    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+                </form>
+            </div>
 
-<form action="/deletereview" method="post">
-    <input type="hidden" name="id" value="{{ review[1] }}">
-    <input type="submit" value="Poista">
+            <form action="/deletereview" method="post">
+                <input type="hidden" name="id" value="{{ review[1] }}">
+                <input type="submit" value="Poista">
 
-    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-</form>
-<form action="/addfavorite" method="post">
-    <input type="hidden" name="book_id" value="{{ review[0] }}">
-    <input type="submit" value="Merkkaa suosikiksi">
+                <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+            </form>
+            <form action="/addfavorite" method="post">
+                <input type="hidden" name="book_id" value="{{ review[0] }}">
+                <input type="submit" value="Merkkaa suosikiksi">
 
-    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-</form>
-<form action="/addfuture" method="post">
-    <input type="hidden" name="book_id" value="{{ review[0] }}">
-    <input type="submit" value="Lisää lukulistalle">   
+                <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+            </form>
+            <form action="/addfuture" method="post">
+                <input type="hidden" name="book_id" value="{{ review[0] }}">
+                <input type="submit" value="Lisää lukulistalle">
 
-    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-</form>
-<hr>
-{% endfor %}
-{% endif %}
-
-Olet kirjautunut sisään.
-<a href="/logout">Kirjaudu ulos</a>
+                <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+            </form>
+            <hr>
+        {% endfor %}
+    {% endif %}
+    Olet kirjautunut sisään.
+    <a href="/logout">Kirjaudu ulos</a>
 {% else %}
-<a href="/login">Kirjaudu sisään</a>
+    <a href="/login">Kirjaudu sisään</a>
 {% endif %}
 
 <script>
     function toggleEditForm(reviewId) {
-      var reviewDiv = document.getElementById("review-" + reviewId);
-      var formDiv = document.getElementById("form-" + reviewId);
-      if (reviewDiv.style.display === "none") {
-        reviewDiv.style.display = "block";
-        formDiv.style.display = "none";
-      } else {
-        reviewDiv.style.display = "none";
-        formDiv.style.display = "block";
-      }
+        var reviewDiv = document.getElementById("review-" + reviewId);
+        var formDiv = document.getElementById("form-" + reviewId);
+        if (reviewDiv.style.display === "none") {
+            reviewDiv.style.display = "block";
+            formDiv.style.display = "none";
+        } else {
+            reviewDiv.style.display = "none";
+            formDiv.style.display = "block";
+        }
     }
 </script>

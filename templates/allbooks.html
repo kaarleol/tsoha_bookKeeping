@@ -1,87 +1,86 @@
-<a href="/">Aloitussivu </a> | <a href="/newbook">Lisää yleinen kirja</a> |  <a href="/allbooks">Selaa kirjoja</a> | <a href="/newfavorite">Suosikit</a> | <a href="/newfuture">Lukulista</a><hr>
+<a href="/">Aloitussivu</a> | <a href="/newbook">Lisää yleinen kirja</a> | <a href="/allbooks">Selaa kirjoja</a> | <a href="/newfavorite">Suosikit</a> | <a href="/newfuture">Lukulista</a>
 <hr>
-<p>
-Kirjojen määrä: {{ count }}
+<p>Kirjojen määrä: {{ count }}</p>
 <hr>
+
 {% for book in books %}
-  <div id="book-{{ book[0] }}">
-    <p><i>Otsikko:</i> {{ book[1] }}</p>
-    <p><i>Kirjailija:</i> {{ book[2] }}</p>
-    <p><i>Julkaisupäivä:</i> {{ book[3] }}</p>
-    <p><i>Genre:</i> {{ book[4] }}</p>
-    <p><i>Kirjan lisääjä:</i> {{ book[5] }}</p>
-  </div>
+<div id="book-{{ book[0] }}">
+  <p><i>Otsikko:</i> {{ book[1] }}</p>
+  <p><i>Kirjailija:</i> {{ book[2] }}</p>
+  <p><i>Julkaisupäivä:</i> {{ book[3] }}</p>
+  <p><i>Genre:</i> {{ book[4] }}</p>
+  <p><i>Kirjan lisääjä:</i> {{ book[5] }}</p>
+</div>
 
-  {% if session.user_id == book[6] %}
-  <button onclick="toggleEditForm('{{ book[0] }}')">Edit</button>
-  <div id="form-{{ book[0] }}" style="display: none;">
-    <form action="/editbook" method="post">
-      <input type="text" name="title" value="{{ book[1] }}">
-      <input type="text" name="author" value="{{ book[2] }}">
-      <input type="date" name="publication_date" value="{{ book[3] }}">
-      <input type="text" name="genre" value="{{ book[4] }}">
-      <button type="submit">Save</button>
+{% if session.user_id == book[6] %}
+<button onclick="toggleEditForm('{{ book[0] }}')">Edit</button>
+<div id="form-{{ book[0] }}" style="display: none;">
+  <form action="/editbook" method="post">
+    <input type="text" name="title" value="{{ book[1] }}">
+    <input type="text" name="author" value="{{ book[2] }}">
+    <input type="date" name="publication_date" value="{{ book[3] }}">
+    <input type="text" name="genre" value="{{ book[4] }}">
+    <button type="submit">Save</button>
 
-      <input type="hidden" name="bookId" value="{{ book[0] }}">
-      <input type="hidden" name="added_by" value="{{ book[6] }}">
-      <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-    </form>
-  </div>
-
-  <form action="/deletebook" method="post">
-    <input type="hidden" name="book_id" value="{{ book[0] }}">
+    <input type="hidden" name="bookId" value="{{ book[0] }}">
     <input type="hidden" name="added_by" value="{{ book[6] }}">
-    <input type="submit" value="Poista">
-
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+  </form>
+</div>
+
+<form action="/deletebook" method="post">
+  <input type="hidden" name="book_id" value="{{ book[0] }}">
+  <input type="hidden" name="added_by" value="{{ book[6] }}">
+  <input type="submit" value="Poista">
+
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
-  {% endif %}
+{% endif %}
 
 <button id="open-form-button" onclick="openForm()">Merkkaa luetuksi</button>
 
 <div id="reviewform" style="display: none;">
-    <form action="/addreview" method="post">
-        Lisää kirja: <br>
-        <input type="hidden" name="book_id" value="{{ book[0] }}">
-        <p>
-        Kirjan vaihe:
-        <select name="read_status">
-        {% for option in dropdown_options %}
-          <option  value="{{ option }}">{{ option }}</option>
-        {% endfor %}
-        </select>
-        <p>
-        Arvosana (1-10):
-        <input type="number" name="rating" min="1" max="10">
-        <p>
-        Arvostelu:
-        <p>
-        <textarea name="review" rows="3" cols="40"></textarea>
-        <br>
-    
-        <input type="submit" value="Lähetä">
+  <form action="/addreview" method="post">
+    Lisää kirja: <br>
+    <input type="hidden" name="book_id" value="{{ book[0] }}">
+    <p>
+    Kirjan vaihe:
+    <select name="read_status">
+      {% for option in dropdown_options %}
+      <option value="{{ option }}">{{ option }}</option>
+      {% endfor %}
+    </select>
+    <p>
+    Arvosana (1-10):
+    <input type="number" name="rating" min="1" max="10">
+    <p>
+    Arvostelu:
+    <p>
+    <textarea name="review" rows="3" cols="40"></textarea>
+    <br>
 
-        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-    </form>
+    <input type="submit" value="Lähetä">
+
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+  </form>
 </div>
 
 <p>
+<form action="/addfavorite" method="post">
+  <input type="hidden" name="book_id" value="{{ book[0] }}">
+  <input type="submit" value="Merkkaa suosikiksi">
 
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+</form>
+<form action="/addfuture" method="post">
+  <input type="hidden" name="book_id" value="{{ book[0] }}">
+  <input type="submit" value="Lisää lukulistalle">
 
-    <form action="/addfavorite" method="post">
-        <input type="hidden" name="book_id" value="{{ book[0] }}">
-        <input type="submit" value="Merkkaa suosikiksi">
-
-        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-    </form>
-    <form action="/addfuture" method="post">
-        <input type="hidden" name="book_id" value="{{ book[0] }}">
-        <input type="submit" value="Lisää lukulistalle">   
-
-        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-    </form>
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+</form>
 <hr>
 {% endfor %}
+
 {% if session.user_id %}
 Olet kirjautunut sisään.
 <a href="/logout">Kirjaudu ulos</a>
@@ -90,21 +89,20 @@ Olet kirjautunut sisään.
 {% endif %}
 
 <script>
-    function openForm() {
-      var formDiv = document.getElementById("reviewform");
-      formDiv.style.display = "block";
-    }
- 
+function openForm() {
+  var formDiv = document.getElementById("reviewform");
+  formDiv.style.display = "block";
+}
 
-    function toggleEditForm(bookId) {
-        var bookDiv = document.getElementById("book-" + bookId);
-        var formDiv = document.getElementById("form-" + bookId);
-        if (bookDiv.style.display === "none") {
-            bookDiv.style.display = "block";
-            formDiv.style.display = "none";
-        } else {
-            bookDiv.style.display = "none";
-            formDiv.style.display = "block";
-        }
-    }
+function toggleEditForm(bookId) {
+  var bookDiv = document.getElementById("book-" + bookId);
+  var formDiv = document.getElementById("form-" + bookId);
+  if (bookDiv.style.display === "none") {
+    bookDiv.style.display = "block";
+    formDiv.style.display = "none";
+  } else {
+    bookDiv.style.display = "none";
+    formDiv.style.display = "block";
+  }
+}
 </script>

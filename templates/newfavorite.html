@@ -1,5 +1,7 @@
-<a href="/">Aloitussivu </a> | <a href="/newbook">Lisää yleinen kirja</a> |  <a href="/allbooks">Selaa kirjoja</a> | <a href="/newfavorite">Suosikit</a> | <a href="/newfuture">Lukulista</a><hr>
+<a href="/">Aloitussivu</a> | <a href="/newbook">Lisää yleinen kirja</a> | <a href="/allbooks">Selaa kirjoja</a> | <a href="/newfavorite">Suosikit</a> | <a href="/newfuture">Lukulista</a>
 <hr>
+<hr>
+
 {% if session.user_id %}
 Suosikkeja: {{ count }}
 <hr>
@@ -15,12 +17,12 @@ Suosikkeja: {{ count }}
 <p>
 <i>Käyttäjä:</i> {{ favorite[6] }}
 <p>
-    <form action="/deletefavorite" method="post">
-        <input type="hidden" name="id" value="{{ favorite[1] }}">
-        <input type="submit" value="Poista">
+<form action="/deletefavorite" method="post">
+    <input type="hidden" name="id" value="{{ favorite[1] }}">
+    <input type="submit" value="Poista">
 
-        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-    </form>
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+</form>
 <hr>
 {% endfor %}
 {% endif %}
