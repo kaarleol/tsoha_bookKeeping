@@ -22,6 +22,8 @@ Suosikkeja: {{ count }}
     <form action="/deletefavorite" method="post">
         <input type="hidden" name="id" value="{{ favorite[1] }}">
         <input type="submit" value="Poista">
+
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     </form>
 <hr>
 {% endfor %}

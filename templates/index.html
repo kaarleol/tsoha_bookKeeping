@@ -27,14 +27,20 @@ Luettuja kirjoja: {{ count }}
 <form action="/deletereview" method="post">
     <input type="hidden" name="id" value="{{ review[1] }}">
     <input type="submit" value="Poista">
+
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 <form action="/addfavorite" method="post">
     <input type="hidden" name="book_id" value="{{ review[0] }}">
     <input type="submit" value="Merkkaa suosikiksi">
+
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 <form action="/addfuture" method="post">
     <input type="hidden" name="book_id" value="{{ review[0] }}">
     <input type="submit" value="Lisää lukulistalle">   
+
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 <hr>
 {% endfor %}

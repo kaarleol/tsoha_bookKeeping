@@ -1,5 +1,5 @@
 from app import app
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, session
 import books, users, reviews, favorites, futurereading
 
 @app.route("/")
@@ -45,6 +45,9 @@ def addbook():
     author = request.form["author"]
     publication_date = request.form["publication_date"]
     genre = request.form["genre"]
+    if session["csrf_token"] != request.form["csrf_token"]:
+        return render_template("error.html", message="Unauthorized action.")
+    
     if books.send(title, author, publication_date, genre):
         return redirect("/")
     else:
@@ -52,7 +55,9 @@ def addbook():
     
 @app.route("/deletebook", methods=["POST"])
 def deletebook():
-    book_id = request.form["book_id"]
+    book_id = request.form["book_id"] 
+    if session["csrf_token"] != request.form["csrf_token"]:
+        return render_template("error.html", message="Unauthorized action.")
     if book_id:
         if books.delete(book_id):
             return redirect("/allbooks")
@@ -67,6 +72,9 @@ def addreview():
     read_status = request.form["read_status"]
     rating = request.form["rating"]
     review = request.form["review"]
+
+    if session["csrf_token"] != request.form["csrf_token"]:
+        return render_template("error.html", message="Unauthorized action.")
     if reviews.send(book_id, read_status, rating, review):
         return redirect("/")
     else:
@@ -75,6 +83,8 @@ def addreview():
 @app.route("/deletereview", methods=["POST"])
 def deletereview():
     id = request.form["id"]
+    if session["csrf_token"] != request.form["csrf_token"]:
+        return render_template("error.html", message="Unauthorized action.")
     if id:
         if reviews.delete(id):
             return redirect("/")
@@ -86,6 +96,9 @@ def deletereview():
 @app.route("/addfavorite", methods=["POST"])
 def addfavorite():
     book_id = request.form["book_id"]
+
+    if session["csrf_token"] != request.form["csrf_token"]:
+        return render_template("error.html", message="Unauthorized action.")
     if favorites.send(book_id):
         return redirect("/newfavorite")
     else:
@@ -94,6 +107,9 @@ def addfavorite():
 @app.route("/deletefavorite", methods=["POST"])
 def deletefavorite():
     id = request.form["id"]
+
+    if session["csrf_token"] != request.form["csrf_token"]:
+        return render_template("error.html", message="Unauthorized action.")
     if id:
         if favorites.delete(id):
             return redirect("/newfavorite")
@@ -105,6 +121,9 @@ def deletefavorite():
 @app.route("/addfuture", methods=["POST"])
 def addfuture():
     book_id = request.form["book_id"]
+
+    if session["csrf_token"] != request.form["csrf_token"]:
+        return render_template("error.html", message="Unauthorized action.")
     if futurereading.send(book_id):
         return redirect("/newfuture")
     else:
@@ -113,6 +132,9 @@ def addfuture():
 @app.route("/deletefuture", methods=["POST"])
 def deletefuture():
     id = request.form["id"]
+
+    if session["csrf_token"] != request.form["csrf_token"]:
+        return render_template("error.html", message="Unauthorized action.")
     if id:
         if futurereading.delete(id):
             return redirect("/newfuture")

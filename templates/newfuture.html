@@ -23,6 +23,8 @@ Kirjoja lukulistassa: {{ count }}
 <form action="/deletefuture" method="post">
     <input type="hidden" name="id" value="{{ future[1] }}">
     <input type="submit" value="Poista">
+
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>    
 <hr>
 {% endfor %}
