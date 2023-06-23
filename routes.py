@@ -45,6 +45,7 @@ def addbook():
     author = request.form["author"]
     publication_date = request.form["publication_date"]
     genre = request.form["genre"]
+    
     if session["csrf_token"] != request.form["csrf_token"]:
         return render_template("error.html", message="Unauthorized action.")
     
@@ -53,14 +54,26 @@ def addbook():
     else:
         return render_template("error.html", message="Kirjan lisäys ei onnistunut")
     
+@app.route("/editbook", methods=["POST"])
+def editbook():
+    book_id=request.form["bookId"]
+    title = request.form["title"]
+    author = request.form["author"]
+    publication_date = request.form["publication_date"]
+    genre = request.form["genre"]
+
+    if session["csrf_token"] != request.form["csrf_token"]:
+        return render_template("error.html", message="Unauthorized action.")
+    
+    if books.edit(book_id, title, author, publication_date, genre):
+        return redirect("/allbooks")
+    else:
+        return render_template("error.html", message="Kirjan muokkaus ei onnistunut")    
+    
 @app.route("/deletebook", methods=["POST"])
 def deletebook():
     book_id = request.form["book_id"] 
-    added_by = request.form["added_by"]
 
-    if added_by != users.user_id:
-        return render_template("error.html", message="Vain kirjan lisääjä voi poistaa sen")
-    
     if session["csrf_token"] != request.form["csrf_token"]:
         return render_template("error.html", message="Unauthorized action.")
     if book_id:

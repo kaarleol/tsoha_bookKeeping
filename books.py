@@ -21,3 +21,9 @@ def delete(book_id):
     db.session.execute(sql, {"book_id":book_id})
     db.session.commit()
     return True
+
+def edit(book_id, title, author, publication_date, genre):
+    sql = text("UPDATE book SET title=:title, author=:author, publication_date=:publication_date, genre=:genre WHERE book_id=:book_id")
+    db.session.execute(sql, {"title":title, "author":author, "publication_date":publication_date, "genre":genre, "book_id":book_id})
+    db.session.commit()
+    return True
