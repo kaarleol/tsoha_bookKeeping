@@ -46,12 +46,16 @@ Kirjojen määrä: {{ count }}
 </div>
 
 <p>
+    {% if session.user_id == book[6] %}
     <form action="/deletebook" method="post">
         <input type="hidden" name="book_id" value="{{ book[0] }}">
+        <input type="hidden" name="added_by" value="{{ book[6] }}">
         <input type="submit" value="Poista">
 
         <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     </form>
+    {% endif %}
+
     <form action="/addfavorite" method="post">
         <input type="hidden" name="book_id" value="{{ book[0] }}">
         <input type="submit" value="Merkkaa suosikiksi">

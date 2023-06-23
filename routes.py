@@ -56,6 +56,11 @@ def addbook():
 @app.route("/deletebook", methods=["POST"])
 def deletebook():
     book_id = request.form["book_id"] 
+    added_by = request.form["added_by"]
+
+    if added_by != users.user_id:
+        return render_template("error.html", message="Vain kirjan lisääjä voi poistaa sen")
+    
     if session["csrf_token"] != request.form["csrf_token"]:
         return render_template("error.html", message="Unauthorized action.")
     if book_id:
