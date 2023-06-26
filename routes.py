@@ -8,8 +8,7 @@ def index():
     dropdown_options = ['Luettu', 'Kesken']
     if list:
         return render_template("index.html", count=len(list), reviews=list, dropdown_options=dropdown_options)
-    else:
-        return render_template("index.html", count=0, reviews=None)
+    return render_template("index.html", count=0, reviews=None)
     
 
 @app.route("/allbooks")
@@ -17,6 +16,20 @@ def allbooks():
     dropdown_options = ['Luettu', 'Kesken']
     list = books.get_list()
     return render_template("allbooks.html", count=len(list), books=list, dropdown_options=dropdown_options)
+
+
+@app.route("/search", methods=["POST"])
+def search():
+    search_string = request.form["value"]
+    dropdown_options = ['Luettu', 'Kesken']
+    if search_string:
+        list = books.search(search_string)
+    else:
+        list = books.get_list()
+    if len(list) == 0:
+        return render_template("error.html", message="Ei hakutuloksia kyseisellä haulla")
+    return render_template("allbooks.html", count=len(list), books=list, dropdown_options=dropdown_options)
+
 
 @app.route("/newbook")
 def newbook():
@@ -28,16 +41,14 @@ def newfavorite():
     list = favorites.get_list()
     if list:
         return render_template("newfavorite.html", count=len(list), favorites=list)
-    else:
-        return render_template("newfavorite.html", count=0, favorites=None)
+    return render_template("newfavorite.html", count=0, favorites=None)
 
 @app.route("/newfuture")
 def newfuture():
     list = futurereading.get_list()
     if list:
         return render_template("newfuture.html", count=len(list), futures=list)
-    else:
-        return render_template("newfuture.html", count=0, futures=None)
+    return render_template("newfuture.html", count=0, futures=None)
 
 
 @app.route("/addbook", methods=["POST"])

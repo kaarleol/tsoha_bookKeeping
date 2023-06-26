@@ -27,3 +27,8 @@ def edit(book_id, title, author, publication_date, genre):
     db.session.execute(sql, {"title":title, "author":author, "publication_date":publication_date, "genre":genre, "book_id":book_id})
     db.session.commit()
     return True
+
+def search(search_string):
+    sql = text("SELECT B.book_id, B.title, B.author, B.publication_date, B.genre, U.username, B.added_by FROM book B, users U WHERE (B.title ILIKE :search_string OR B.author ILIKE :search_string2) AND B.added_by=U.user_id ORDER BY B.title;")
+    result = db.session.execute(sql, {"search_string": f"%{search_string}%", "search_string2": f"%{search_string}%"})
+    return result.fetchall()

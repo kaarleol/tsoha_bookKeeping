@@ -1,5 +1,13 @@
 <a href="/">Aloitussivu</a> | <a href="/newbook">Lisää yleinen kirja</a> | <a href="/allbooks">Selaa kirjoja</a> | <a href="/newfavorite">Suosikit</a> | <a href="/newfuture">Lukulista</a>
 <hr>
+<hr>
+Hae kirjaa tai kirjailijaa
+<p>
+<form action="/search" method="POST">
+  <textarea name="value" rows="1" cols="40"></textarea>
+  <input type="submit" value="Hae">
+</form>
+<hr>
 <p>Kirjojen määrä: {{ count }}</p>
 <hr>
 
